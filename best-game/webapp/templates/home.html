@@ -6,11 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-
+        h1 {
+            color: black;
+        }
     </style>
 </head>
 <body>
-
-
+<div> <h1>Guess 4 numbers. Enter them separated with spaces:</h1>
+        <form method="POST" action="/">
+            {% csrf_token %}
+            <input type="text" name="numbers"/>
+            <input type="submit" value="Send"/>
+        </form>
+</div>
 </body>
 </html>
