@@ -30,6 +30,8 @@ class Check:
 
 l = list(range(1, 10))
 secret = random.sample(l, 4)
+data_history = {}
+count = 1
 
 
 def check_view(request):
@@ -45,10 +47,23 @@ def check_view(request):
             if guessed_num == 'ВЫ ПОБЕДИЛИ!':
                 message = f'{guessed_num}'
                 secret = random.sample(l, 4)
+
             else:
                 message = f'{guessed_num}'
         except ValueError:
             message = f'Введены не числа!'
         except KeyError:
             message = f'Введите данные!'
+    global count
+    data_history[count] = message
+    count += 1
     return render(request, 'home.html', {'message': message})
+
+
+def history(request):
+    if request.method == 'GET':
+        history = data_history
+        return render(request, 'data.html', {'history': history})
+
+
+
