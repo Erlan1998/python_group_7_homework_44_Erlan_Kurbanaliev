@@ -18,6 +18,11 @@
             <input type="text" name="numbers"/>
             <input type="submit" value="Send"/>
         </form>
+    <h2>
+         {% if message %}
+          Result: {{ message }}
+         {% endif %}
+     </h2>
 </div>
 </body>
 </html>
