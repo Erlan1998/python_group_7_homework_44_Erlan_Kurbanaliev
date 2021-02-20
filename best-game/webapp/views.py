@@ -2,6 +2,32 @@ from django.shortcuts import render
 from urllib.parse import parse_qs
 
 
+class Check:
+    def __init__(self, secret, actual):
+        self.secret = secret
+        self.actual = actual
+
+    def guess_numbers(self):
+        bulls = 0
+        cows = 0
+        if len(set(self.actual)) == 4:
+            for i in range(len(self.secret)):
+                if 0 >= self.actual[i] or self.actual[i] >= 11:
+                    return 'Введенные чиcла не должны быть меньше (0) и не больше 10!'
+                if self.secret[i] == self.actual[i]:
+                    bulls = bulls + 1
+                elif self.actual[i] in self.secret:
+                    cows = cows + 1
+            if bulls == 4:
+                return 'ВЫ ПОБЕДИЛИ!'
+            else:
+                return f'bulss = {bulls}, cows = {cows}'
+        elif len(self.actual) != 4:
+            return 'Вводите ровно 4 числа! не меньше и не больше!'
+        else:
+            return 'Введены похожие числа!'
+
+
 def check_view(request):
     secret = [1, 2, 3, 4]
     if request.method == 'GET':
@@ -10,11 +36,12 @@ def check_view(request):
         request_body = parse_qs(request.body.decode())
         try:
             data = list(map(int, request_body['numbers'][0].split(' ')))
-
-            if data == secret:
-                message = f'ВЫ ПОБЕДИЛИ!'
+            check = Check(secret, data)
+            guessed_num = check.guess_numbers()
+            if guessed_num == 'ВЫ ПОБЕДИЛИ!':
+                message = f'{guessed_num}'
             else:
-                message = f'попробуйте еще раз'
+                message = f'{guessed_num}'
         except ValueError:
             message = f'Введены не числа!'
         except KeyError:
