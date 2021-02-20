@@ -21,7 +21,7 @@ class Check:
             if bulls == 4:
                 return 'ВЫ ПОБЕДИЛИ!'
             else:
-                return f'bulss = {bulls}, cows = {cows}'
+                return f'bulss = {bulls}, cows = {cows}!'
         elif len(self.actual) != 4:
             return 'Вводите ровно 4 числа! не меньше и не больше!'
         else:

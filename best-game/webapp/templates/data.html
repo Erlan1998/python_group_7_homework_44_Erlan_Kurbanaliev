@@ -14,7 +14,9 @@
 <body>
 <div> <h1>History of moves:</h1>
  <h2>
-
+         {% for key, value in history.items%}
+          <div>{{key}}. {{value}}</div>
+         {% endfor %}
      </h2>
 </div>
 </body>
