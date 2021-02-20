@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from urllib.parse import parse_qs
-
+import random
 
 class Check:
     def __init__(self, secret, actual):
@@ -28,18 +28,23 @@ class Check:
             return 'Введены похожие числа!'
 
 
+l = list(range(1, 10))
+secret = random.sample(l, 4)
+
+
 def check_view(request):
-    secret = [1, 2, 3, 4]
     if request.method == 'GET':
         return render(request, 'home.html')
     elif request.method == 'POST':
         request_body = parse_qs(request.body.decode())
         try:
             data = list(map(int, request_body['numbers'][0].split(' ')))
+            global secret
             check = Check(secret, data)
             guessed_num = check.guess_numbers()
             if guessed_num == 'ВЫ ПОБЕДИЛИ!':
                 message = f'{guessed_num}'
+                secret = random.sample(l, 4)
             else:
                 message = f'{guessed_num}'
         except ValueError:
