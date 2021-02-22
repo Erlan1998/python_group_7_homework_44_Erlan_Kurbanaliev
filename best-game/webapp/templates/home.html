@@ -6,13 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
+        body {
+            text-align: center;
+            color: black;
+            font-size: 18px;
+        }
+
         h1 {
             color: black;
         }
+        .page{
+            padding-top: 70px;
+        }
+
     </style>
 </head>
 <body>
-<div> <h1>Guess 4 numbers. Enter them separated with spaces:</h1>
+    <div> <h1>Guess 4 numbers. Enter them separated with spaces:</h1>
         <form method="POST" action="/">
             {% csrf_token %}
             <input type="text" name="numbers"/>
@@ -23,7 +33,10 @@
          {% if message %}
           Result: {{ message }}
          {% endif %}
-     </h2>
-</div>
+    </h2>
+    </div>
+    <div class="page">
+        <img src="https://st3.depositphotos.com/1719108/13154/i/600/depositphotos_131548618-stock-photo-bull-and-cow-are-standing.jpg" alt="">
+    </div>
 </body>
 </html>

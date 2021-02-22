@@ -6,18 +6,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        h1 {
+        body{
+            text-align: -webkit-center;
             color: black;
+            padding: 10px;
+            font-size: 18px;
+        }
+        .container{
+            width: 50%;
+            border: 3px solid black;
+        }
+        h2{
+            text-align: left;
+            width: 50%;
         }
     </style>
 </head>
 <body>
-<div> <h1>History of moves:</h1>
+<div class="container"> <h1>History of moves:</h1>
  <h2>
          {% for key, value in history.items%}
           <div>{{key}}. {{value}}</div>
          {% endfor %}
      </h2>
+<a href="/">Main menu</a>
 </div>
 </body>
 </html>
