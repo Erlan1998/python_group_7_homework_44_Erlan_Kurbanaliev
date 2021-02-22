@@ -38,6 +38,8 @@ def check_view(request):
     if request.method == 'GET':
         return render(request, 'home.html')
     elif request.method == 'POST':
+        global count
+        global data_history
         request_body = parse_qs(request.body.decode())
         try:
             data = list(map(int, request_body['numbers'][0].split(' ')))
@@ -47,6 +49,8 @@ def check_view(request):
             if guessed_num == 'ВЫ ПОБЕДИЛИ!':
                 message = f'{guessed_num}'
                 secret = random.sample(l, 4)
+                data_history = {}
+                count = 1
 
             else:
                 message = f'{guessed_num}'
@@ -54,10 +58,10 @@ def check_view(request):
             message = f'Введены не числа!'
         except KeyError:
             message = f'Введите данные!'
-    global count
-    data_history[count] = message
-    count += 1
-    return render(request, 'home.html', {'message': message})
+        if message != "ВЫ ПОБЕДИЛИ!":
+            data_history[count] = message
+            count += 1
+        return render(request, 'home.html', {'message': message})
 
 
 def history(request):
